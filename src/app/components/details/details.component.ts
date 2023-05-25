@@ -16,9 +16,11 @@ export class DetailsComponent implements OnInit {
   photos: any;
 
   ngOnInit() {
+    // getting user id from url
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
 
+    // getting single user info
     this.SService.getUser(this.id).subscribe({
       next: (data) => {
         console.log(data);
@@ -29,22 +31,11 @@ export class DetailsComponent implements OnInit {
       },
     });
 
+    // getting the user's albums
     this.SService.getAlbums(this.id).subscribe({
       next: (data: any) => {
         console.log(data);
         this.albums = data;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-
-  viewAlbum(x:any){
-    this.SService.getPhotos(x).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.photos = data;
       },
       error: (err) => {
         console.log(err);

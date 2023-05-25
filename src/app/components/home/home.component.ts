@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   users: any;
   id: any;
 
+  // validating inputs
   validation = new FormGroup({
     name: new FormControl(null, [
       Validators.required,
@@ -26,15 +27,12 @@ export class HomeComponent implements OnInit {
       Validators.required,
       Validators.pattern('^[0-9]+$'),
     ]),
-    street: new FormControl(null, [
-      Validators.required,
-    ]),
-    city: new FormControl(null, [
-      Validators.required,
-    ]),
+    street: new FormControl(null, [Validators.required]),
+    city: new FormControl(null, [Validators.required]),
   });
 
   ngOnInit(): void {
+    // getting all users' data
     this.SService.getAllUsers().subscribe({
       next: (data) => {
         // console.log(data);
@@ -45,15 +43,19 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+  // delete a user from the array
   delete(x: any) {
     // console.log(x.target.parentElement.parentElement.getAttribute('id'))
     this.id = x.target.parentElement.parentElement.getAttribute('id');
   }
 
+  // confirming user's delete
   confirmDelete() {
     this.users = this.users.filter((u: any) => u.id != this.id);
   }
 
+  // validating input for ngClass
   validName() {
     return this.validation.controls.name.valid;
   }
