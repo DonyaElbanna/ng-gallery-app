@@ -13,7 +13,19 @@ export class UsersService {
     return this.client.get(this.url);
   }
 
-  deleteStudent(id:any){
-    return this.client.delete(`${this.url}/${id}`)
+  getUser(id: any) {
+    return this.client.get(`${this.url}/${id}`);
+  }
+
+  getAlbums(id:any) {
+    return this.client.get(`https://jsonplaceholder.typicode.com/albums?userId=${id}`);
+  }
+
+  getPhotos(id:any) {
+    return this.client.get(`https://jsonplaceholder.typicode.com/photos?albumId=${id}`);
+  }
+
+  deleteStudent(id: any) {
+    return this.client.delete(`${this.url}/${id}`);
   }
 }
