@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   id: any;
   newUser: any;
   check = false;
+  editedId: any;
 
   // validating inputs
   validation = new FormGroup({
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit {
 
   addUser() {
     if (this.validation.valid) {
-      console.log('add user', this.validation.value, this.validation.valid);
+      // console.log('add user', this.validation.value, this.validation.valid);
       this.newUser = {
         id: this.users.length + 1,
         name: this.validation.value.name,
@@ -66,9 +67,9 @@ export class HomeComponent implements OnInit {
   }
 
   // delete a user from the array
-  delete(x: any) {
-    // console.log(x.target.parentElement.parentElement.getAttribute('id'))
-    this.id = x.target.parentElement.parentElement.getAttribute('id');
+  delete(id: any) {
+    // console.log(id.target.parentElement.parentElement.getAttribute('id'))
+    this.id = id.target.parentElement.parentElement.getAttribute('id');
   }
 
   // confirming user's delete
@@ -95,5 +96,31 @@ export class HomeComponent implements OnInit {
 
   validCity() {
     return this.validation.controls.city.valid;
+  }
+
+  // modal to edit user
+  editUser(id: any) {
+    this.editedId = Number(
+      id.target.parentElement.parentElement.getAttribute('id')
+    );
+    // console.log(this.users[this.editedId - 1]);
+  }
+
+  // edit user details
+  confirmEdit() {
+    if (this.validation.valid) {
+      this.users[this.editedId - 1] = {
+        id:  this.users[this.editedId - 1].id,
+        name: this.validation.value.name,
+        email: this.validation.value.email,
+        phone: this.validation.value.phone,
+        address: {
+          street: this.validation.value.street,
+          city: this.validation.value.city,
+        },
+      };
+    }
+    // console.log(this.validation.valid)
+    // console.log(this.users[this.editedId - 1]);
   }
 }

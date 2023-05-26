@@ -24,7 +24,7 @@
         <th>Number</th>
         <th>Address</th>
         <th>Details</th>
-        <th>Update</th>
+        <th>Edit</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -46,7 +46,14 @@
           </button>
         </td>
         <td class="text-center">
-          <button class="btn btn-outline-success">update</button>
+          <button
+            class="btn btn-outline-success"
+            data-bs-toggle="modal"
+            data-bs-target="#editModal"
+            (click)="editUser($event)"
+          >
+            edit
+          </button>
         </td>
         <td class="text-center">
           <button
@@ -239,6 +246,149 @@
           (click)="confirmDelete()"
         >
           yes, delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit a user form modal -->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User Information</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="validation">
+          <div class="row mb-3">
+            <div class="col-2">
+              <label class="form-label">Name</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="text"
+                formControlName="name"
+                [ngClass]="
+                  validName()
+                    ? 'form-control border border-success border-3'
+                    : validation.controls.name.value
+                    ? 'form-control border border-danger border-3'
+                    : 'form-control'
+                "
+              />
+            </div>
+            <div class="col-1">
+              <span class="text-danger">*</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-2">
+              <label class="form-label">Email</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="
+                  validEmail()
+                    ? 'form-control border border-success border-3'
+                    : validation.controls.email.value
+                    ? 'form-control border border-danger border-3'
+                    : 'form-control'
+                "
+              />
+            </div>
+            <div class="col-1">
+              <span class="text-danger">*</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-2">
+              <label class="form-label">Phone</label>
+            </div>
+            <div class="col-9">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="phone"
+                [ngClass]="
+                  validPhone()
+                    ? 'form-control border border-success border-3'
+                    : validation.controls.phone.value
+                    ? 'form-control border border-danger border-3'
+                    : 'form-control'
+                "
+              />
+            </div>
+            <div class="col-1">
+              <span class="text-danger">*</span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-2">
+              <label class="form-label">Address</label>
+            </div>
+            <div class="col-5">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="street"
+                placeholder="street"
+                [ngClass]="
+                  validStreet()
+                    ? 'form-control border border-success border-3'
+                    : validation.controls.street.value
+                    ? 'form-control border border-danger border-3'
+                    : 'form-control'
+                "
+              />
+            </div>
+            <div class="col-4">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="city"
+                placeholder="city"
+                [ngClass]="
+                  validCity()
+                    ? 'form-control border border-success border-3'
+                    : validation.controls.city.value
+                    ? 'form-control border border-danger border-3'
+                    : 'form-control'
+                "
+              />
+            </div>
+            <div class="col-1">
+              <span class="text-danger">*</span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="confirmEdit()"
+        >
+          Edit
         </button>
       </div>
     </div>

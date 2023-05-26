@@ -22,7 +22,10 @@ export class LoginComponent {
       Validators.required,
       Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$'),
     ]),
-    password: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
 
   // returns true if valid email
@@ -36,10 +39,12 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
+    localStorage.setItem('authed', 'false');
+
     // getting all users' data
     this.SService.getRegisteredUsers().subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         // console.log(this.validation.controls.email.value)
         this.registeredUsers = data;
       },
@@ -60,6 +65,8 @@ export class LoginComponent {
     // valid input and user is registered
     if (this.validation.valid && this.authedUser.length) {
       this.router.navigate(['/users']);
+      // for guarded routes
+      localStorage.setItem('authed', 'true');
     }
     // not valid inputs
     else if (
@@ -69,10 +76,12 @@ export class LoginComponent {
     ) {
       this.check = false;
       this.closed = false;
+      localStorage.setItem('authed', 'false');
     }
     // valid inputs but user isn't registered
     else if (this.authedUser.length == 0) {
       this.registered = false;
+      localStorage.setItem('authed', 'false');
     }
   }
 }

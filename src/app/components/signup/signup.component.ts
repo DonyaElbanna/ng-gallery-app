@@ -9,14 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  constructor(public SService: SiteUsersService, public router: Router) {}
+  constructor(public SService: SiteUsersService, public router: Router) {
+    localStorage.setItem('authed', 'false');
+  }
 
   validation = new FormGroup({
     email: new FormControl(null, [
       Validators.required,
       Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$'),
     ]),
-    password: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
   });
 
   check = true;
@@ -41,9 +43,11 @@ export class SignupComponent {
       this.SService.addUser(this.user).subscribe();
       this.router.navigate(['/users']);
       // console.log(this.user);
+      localStorage.setItem('authed', 'true');
     } else {
       this.check = false;
       this.closed = false;
+      localStorage.setItem('authed', 'false');
     }
   }
 }
