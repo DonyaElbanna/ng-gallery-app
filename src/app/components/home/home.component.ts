@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     if (this.validation.valid) {
       console.log('add user', this.validation.value, this.validation.valid);
       this.newUser = {
+        id: this.users.length + 1,
         name: this.validation.value.name,
         email: this.validation.value.email,
         phone: this.validation.value.phone,

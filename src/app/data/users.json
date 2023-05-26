@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "email": "fdfdfdfd@sdsm.bb",
+      "password": "4444"
+    },
+    {
+      "email": "user1@email.com",
+      "password": "111111"
+    },
+    {
+      "email": "user2@email.com",
+      "password": "222222"
+    }
+  ]
+}

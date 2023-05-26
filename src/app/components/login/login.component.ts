@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SiteUsersService } from '../../services/site-users.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(public router: Router) {}
+  constructor(public router: Router, public SService: SiteUsersService) {}
+
   check = true;
   closed = false;
+  registeredUsers: any;
+  authedUser: any;
+  authed = true;
 
   validation = new FormGroup({
     email: new FormControl(null, [
@@ -30,12 +35,39 @@ export class LoginComponent {
     return this.validation.controls.password.valid;
   }
 
-  // redirects to home page if valid login
+  ngOnInit(): void {
+    // getting all users' data
+    this.SService.getRegisteredUsers().subscribe({
+      next: (data) => {
+        console.log(data);
+        // console.log(this.validation.controls.email.value)
+        this.registeredUsers = data;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  // redirects to home page if valid login and user is registered
   login() {
-    if (this.validation.valid) {
+    this.authedUser = this.registeredUsers.filter(
+      (authedUser: any) =>
+        authedUser.email == this.validation.controls.email.value &&
+        authedUser.password == this.validation.controls.password.value
+    );
+
+    if (this.validation.valid && this.authedUser.length) {
       this.router.navigate(['/users']);
-    } else {
+    } else if (
+      !this.validation.valid ||
+      !this.validation.controls.email.value ||
+      !this.validation.controls.password.value
+    ) {
       this.check = false;
+      this.closed = false;
+    } else if (this.authedUser.length == 0) {
+      this.authed = false;
     }
   }
 }

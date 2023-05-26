@@ -71,3 +71,15 @@
   </div>
 </div>
 
+<div *ngIf="!authed">
+  <div
+    class="alert alert-danger d-flex justify-content-between w-50 position-absolute top-0 start-50 translate-middle-x"
+    style="margin-top: 143px"
+    role="alert"
+    *ngIf="!closed"
+  >
+    <span>Invalid Credentials!</span>
+
+    <button type="button" class="btn-close" (click)="closed = true"></button>
+  </div>
+</div>
