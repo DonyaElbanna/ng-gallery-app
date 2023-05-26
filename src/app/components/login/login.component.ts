@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SiteUsersService } from '../../services/site-users.service';
@@ -15,7 +15,7 @@ export class LoginComponent {
   closed = false;
   registeredUsers: any;
   authedUser: any;
-  authed = true;
+  registered = true;
 
   validation = new FormGroup({
     email: new FormControl(null, [
@@ -57,17 +57,22 @@ export class LoginComponent {
         authedUser.password == this.validation.controls.password.value
     );
 
+    // valid input and user is registered
     if (this.validation.valid && this.authedUser.length) {
       this.router.navigate(['/users']);
-    } else if (
+    }
+    // not valid inputs
+    else if (
       !this.validation.valid ||
       !this.validation.controls.email.value ||
       !this.validation.controls.password.value
     ) {
       this.check = false;
       this.closed = false;
-    } else if (this.authedUser.length == 0) {
-      this.authed = false;
+    }
+    // valid inputs but user isn't registered
+    else if (this.authedUser.length == 0) {
+      this.registered = false;
     }
   }
 }

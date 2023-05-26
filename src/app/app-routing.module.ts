@@ -5,9 +5,12 @@ import { DetailsComponent } from './components/details/details.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { LoginComponent } from './components/login/login.component';
 import { authGuard } from './auth/auth.guard';
+import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'users', component: HomeComponent, canActivate: [authGuard] },
   {
     path: 'users/:userId',
