@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
 
+## Description
+
+A SPA using the [fake API](https://jsonplaceholder.typicode.com/), to get, add, edit users and view their details.
+
+## Directions
+
+To start the local server run `json-server users.json --watch` inside the data folder to get the registered users to login or to sign up. You have to be a registered user to view the app. The server runs on `http://localhost:3000/`
+
+To start the project run `ng serve -o`.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
