@@ -15,12 +15,12 @@ export class PhotosComponent implements OnInit {
   ngOnInit(): void {
     // getting album id
     this.albumId = this.route.snapshot.paramMap.get('id');
-    console.log(this.albumId);
+    // console.log(this.albumId);
 
     // getting photos in selected album
     this.SService.getPhotos(this.albumId).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.photos = data;
       },
       error: (err) => {

@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
 
   users: any;
   id: any;
+  newUser: any;
+  check = false;
 
   // validating inputs
   validation = new FormGroup({
@@ -42,6 +44,24 @@ export class HomeComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  addUser() {
+    if (this.validation.valid) {
+      console.log('add user', this.validation.value, this.validation.valid);
+      this.newUser = {
+        name: this.validation.value.name,
+        email: this.validation.value.email,
+        phone: this.validation.value.phone,
+        address: {
+          street: this.validation.value.street,
+          city: this.validation.value.city,
+        },
+      };
+      // console.log(this.newUser);
+      // this.check = true;
+      this.users.push(this.newUser);
+    }
   }
 
   // delete a user from the array

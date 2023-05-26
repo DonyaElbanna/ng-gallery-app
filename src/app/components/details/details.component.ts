@@ -18,12 +18,12 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     // getting user id from url
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
+    // console.log(this.id);
 
     // getting single user info
     this.SService.getUser(this.id).subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         this.user = data;
       },
       error: (err) => {
@@ -34,7 +34,7 @@ export class DetailsComponent implements OnInit {
     // getting the user's albums
     this.SService.getAlbums(this.id).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.albums = data;
       },
       error: (err) => {
