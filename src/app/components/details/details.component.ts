@@ -17,7 +17,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     // getting user id from url
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('userId');
     // console.log(this.id);
 
     // getting single user info

@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { DetailsComponent } from './components/details/details.component';
 import { PhotosComponent } from './components/photos/photos.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'users', pathMatch: 'full' },
+  { path: '', component: LoginComponent },
   { path: 'users', component: HomeComponent },
-  { path: 'users/:id', component: DetailsComponent },
-  { path: 'users/:id/album/:id', component: PhotosComponent },
+  { path: 'users/:userId', component: DetailsComponent },
+  { path: 'users/:userId/album/:albumId', component: PhotosComponent },
 ];
 
 @NgModule({
