@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UsersService } from '../../services/users.services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -49,6 +49,11 @@ export class HomeComponent implements OnInit {
   }
 
   addUser() {
+    console.log('add');
+    this.validation.reset();
+  }
+
+  confirmAddUser() {
     if (this.validation.valid) {
       // console.log('add user', this.validation.value, this.validation.valid);
       this.newUser = {
@@ -106,9 +111,18 @@ export class HomeComponent implements OnInit {
 
   // modal to edit user
   editUser(id: any) {
+    console.log('edit');
     this.editedId = Number(
       id.target.parentElement.parentElement.getAttribute('id')
     );
+    // getting user data in input fields
+    this.validation.setValue({
+      name: this.users[this.editedId - 1].name,
+      email: this.users[this.editedId - 1].email,
+      phone: this.users[this.editedId - 1].phone,
+      street: this.users[this.editedId - 1].address.street,
+      city: this.users[this.editedId - 1].address.city,
+    });
     // console.log(this.users[this.editedId - 1]);
   }
 
