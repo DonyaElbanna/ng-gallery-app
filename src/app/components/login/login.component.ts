@@ -12,7 +12,8 @@ export class LoginComponent {
   constructor(public router: Router, public SService: SiteUsersService) {}
 
   check = true;
-  closed = false;
+  closedValid = false;
+  closedAuthed = false;
   registeredUsers: any;
   authedUser: any;
   registered = true;
@@ -75,12 +76,15 @@ export class LoginComponent {
       !this.validation.controls.password.value
     ) {
       this.check = false;
-      this.closed = false;
+      this.closedValid = false;
+      // this.closedAuthed = false;
       localStorage.setItem('authed', 'false');
     }
     // valid inputs but user isn't registered
     else if (this.authedUser.length == 0) {
       this.registered = false;
+      // this.closedValid = false;
+      this.closedAuthed = false;
       localStorage.setItem('authed', 'false');
     }
   }

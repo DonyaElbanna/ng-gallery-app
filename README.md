@@ -4,11 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Description
 
-A SPA using the [fake API](https://jsonplaceholder.typicode.com/), to get, add, edit users and view their details.
+A SPA using the [jsonplaceholder fake API](https://jsonplaceholder.typicode.com/), to get, add, edit users and view their details.
 
 ## Directions
 
-To start the local server run `json-server users.json --watch` inside the data folder to get the registered users to login or to sign up. You have to be a registered user to view the app. The server runs on `http://localhost:3000/`
+To start the local server run `json-server users.json --watch` inside the data folder to get the registered users to login or to sign up. You have to be a registered user to view the app. The server runs on `http://localhost:3000/users`
 
 To start the project run `ng serve -o`.
 

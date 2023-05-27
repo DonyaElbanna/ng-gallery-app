@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild  } from '@angular/core';
 import { UsersService } from '../../services/users.services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -9,12 +9,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   constructor(public SService: UsersService) {}
-
   users: any;
   id: any;
   newUser: any;
   check = false;
   editedId: any;
+  filled = true;
+  closed = false;
 
   // validating inputs
   validation = new FormGroup({
@@ -63,6 +64,11 @@ export class HomeComponent implements OnInit {
       // console.log(this.newUser);
       // this.check = true;
       this.users.push(this.newUser);
+      this.validation.reset();
+    } else {
+      this.filled = false;
+      this.closed = false;
+      this.validation.reset();
     }
   }
 
@@ -110,7 +116,7 @@ export class HomeComponent implements OnInit {
   confirmEdit() {
     if (this.validation.valid) {
       this.users[this.editedId - 1] = {
-        id:  this.users[this.editedId - 1].id,
+        id: this.users[this.editedId - 1].id,
         name: this.validation.value.name,
         email: this.validation.value.email,
         phone: this.validation.value.phone,
@@ -119,6 +125,11 @@ export class HomeComponent implements OnInit {
           city: this.validation.value.city,
         },
       };
+      this.validation.reset();
+    } else {
+      this.filled = false;
+      this.closed = false;
+      this.validation.reset();
     }
     // console.log(this.validation.valid)
     // console.log(this.users[this.editedId - 1]);
