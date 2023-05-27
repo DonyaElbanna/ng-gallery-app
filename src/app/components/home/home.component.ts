@@ -48,11 +48,12 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // resetting add form to null input values
   addUser() {
-    console.log('add');
     this.validation.reset();
   }
 
+  // adding new user to array
   confirmAddUser() {
     if (this.validation.valid) {
       // console.log('add user', this.validation.value, this.validation.valid);
@@ -69,11 +70,9 @@ export class HomeComponent implements OnInit {
       // console.log(this.newUser);
       // this.check = true;
       this.users.push(this.newUser);
-      this.validation.reset();
     } else {
       this.filled = false;
       this.closed = false;
-      this.validation.reset();
     }
   }
 
@@ -111,7 +110,6 @@ export class HomeComponent implements OnInit {
 
   // modal to edit user
   editUser(id: any) {
-    console.log('edit');
     this.editedId = Number(
       id.target.parentElement.parentElement.getAttribute('id')
     );
@@ -139,11 +137,9 @@ export class HomeComponent implements OnInit {
           city: this.validation.value.city,
         },
       };
-      this.validation.reset();
     } else {
       this.filled = false;
       this.closed = false;
-      this.validation.reset();
     }
     // console.log(this.validation.valid)
     // console.log(this.users[this.editedId - 1]);
